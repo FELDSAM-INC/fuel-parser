@@ -16,12 +16,16 @@ use Twig_Autoloader;
 use Twig_Environment;
 use Twig_Loader_Filesystem;
 use Twig_Lexer;
+use Twig_Extension_Profiler;
+use Twig_Profiler_Profile;
 
 class View_Twig extends \View
 {
 	protected static $_parser;
 	protected static $_parser_loader;
 	protected static $_twig_lexer_conf;
+	protected static $_twig_profile;
+	protected static $_twig_stopwatch = null;
 
 	public static function _init()
 	{
@@ -117,8 +121,59 @@ class View_Twig extends \View
 			isset(static::$_twig_lexer_conf['tag_variable'])
 				and static::$_twig_lexer_conf['tag_variable'] = array_values(static::$_twig_lexer_conf['tag_variable']);
 		}
+		
+		// Twig profiler
+		$profiler = \Config::get('parser.View_Twig.profiler', false);
+		
+		if($profiler)
+		{
+			if( ! isset(static::$_twig_profile))
+			{
+				static::$_twig_profile = new Twig_Profiler_Profile();
+				static::$_twig_profile->enter();
+			}
+			
+			static::$_parser->addExtension(new Twig_Extension_Profiler(static::$_twig_profile));
+					
+			if( ! isset(static::$_twig_stopwatch))
+			{
+				static::$_twig_stopwatch = new \Symfony\Component\Stopwatch\Stopwatch();
+			}
+		}
+		
+		static::$_parser->addExtension(new Twig_Extension_Stopwatch(static::$_twig_stopwatch));
 
 		return static::$_parser;
+	}
+	
+	public static function profile()
+	{
+		$profiler = \Config::get('parser.View_Twig.profiler', false);
+		
+		$result =  array();
+		
+		if( ! $profiler) return $result;
+		
+		static::$_twig_profile->leave();
+		
+		$dumper = new Twig_Profiler_Dumper_Html();
+		
+		$result['node_tree'] = $dumper->dump(static::$_twig_profile);
+		
+		$result['total'] = static::$_twig_profile->getDuration();
+		$result['memory_usage'] = static::$_twig_profile->getMemoryUsage();
+		$result['memory_peak_usage'] = static::$_twig_profile->getPeakMemoryUsage();
+		$result['stopwatch'] = array();
+		
+		foreach(static::$_twig_stopwatch->getSections() as $section)
+		{
+			foreach($section->getEvents() as $name => $event)
+			{
+				$result['stopwatch'][$name] = $event;
+			}
+		}
+		
+		return $result;
 	}
 }
 

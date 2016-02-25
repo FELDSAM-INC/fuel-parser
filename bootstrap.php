@@ -28,4 +28,9 @@
 
 	'Parser\\Twig_Fuel_Extension'   => __DIR__.'/classes/twig/fuel/extension.php',
 	'Parser\\Smarty_Fuel_Extension' => __DIR__.'/classes/smarty/fuel/extension.php',
+	
+	'Parser\\Twig_Extension_Stopwatch'   => __DIR__.'/classes/twig/extension/stopwatch.php',
+	'Parser\\Twig_Node_Stopwatch'        => __DIR__.'/classes/twig/node/stopwatch.php',
+	'Parser\\Twig_Profiler_Dumper_Html'  => __DIR__.'/classes/twig/profiler/dumper/html.php',
+	'Parser\\Twig_TokenParser_Stopwatch' => __DIR__.'/classes/twig/tokenparser/stopwatch.php',
 ));
