@@ -73,6 +73,7 @@ return array(
 		'extensions' => array(
 			'Twig_Fuel_Extension',
 		),
+		'profiler' => false,
 	),
 
 	// HamlTwig with MtHaml https://github.com/arnaud-lb/MtHaml
