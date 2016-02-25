@@ -159,7 +159,7 @@ class View_Twig extends \View
 		
 		$result =  array();
 		
-		if( ! $profiler) return $result;
+		if( ! $profiler or ! static::$_twig_profile) return $result;
 		
 		static::$_twig_profile->leave();
 		
