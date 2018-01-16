@@ -14,7 +14,7 @@ namespace Parser;
 /**
  * @author Fabien Potencier <fabien@symfony.com>
  */
-class Twig_Profiler_Dumper_Html extends \Twig_Profiler_Dumper_Text
+class Twig_Profiler_Dumper_Html extends \Twig_Profiler_Dumper_Base
 {
     private static $colors = array(
         'block' => '#a2cd5a',
