@@ -1,13 +1,17 @@
 {
-	"name": "fuel/parser",
+	"name": "feldsam-inc/fuel-parser",
 	"description" : "FuelPHP 1.x Parser Package",
 	"type": "fuel-package",
-	"homepage": "https://github.com/fuel/parser",
+	"homepage": "https://github.com/FELDSAM-INC/fuel-parser",
 	"license": "MIT",
 	"authors": [
 		{
 			"name": "FuelPHP Development Team",
 			"email": "team@fuelphp.com"
+		},
+		{
+			"name": "Kristian Feldsam",
+			"email": "feldsam@gmail.com"
 		}
 	],
 	"require": {
