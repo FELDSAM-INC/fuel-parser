@@ -32,11 +32,11 @@ class Twig_Node_Stopwatch extends \Twig_Node
             ->raw(' = ')
             ->subcompile($this->getNode('name'))
             ->write(";\n")
-            ->write("\$this->env->getExtension('stopwatch')->getStopwatch()->start(")
+            ->write("\$this->env->getExtension('Parser\Twig_Extension_Stopwatch')->getStopwatch()->start(")
             ->subcompile($this->getNode('var'))
             ->raw(", 'template');\n")
             ->subcompile($this->getNode('body'))
-            ->write("\$this->env->getExtension('stopwatch')->getStopwatch()->stop(")
+            ->write("\$this->env->getExtension('Parser\Twig_Extension_Stopwatch')->getStopwatch()->stop(")
             ->subcompile($this->getNode('var'))
             ->raw(");\n")
         ;
