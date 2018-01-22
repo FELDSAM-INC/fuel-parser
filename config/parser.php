@@ -70,6 +70,17 @@ return array(
 			'autoescape'          => false,
 			'optimizations'       => -1,
 		),
+        'defaults' => array(
+            'number_format' => array(
+                'decimals'            => 2,
+                'decimal_point'       => ',',
+                'thousands_separator' => '&nbsp;',
+            ),
+            'date_format'   => array(
+                'dates'     => 'd. m. Y',
+                'intervals' => '%d days',
+            ),
+        ),
 		'extensions' => array(
 			'Twig_Fuel_Extension',
 		),

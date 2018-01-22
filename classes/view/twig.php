@@ -117,6 +117,13 @@ class View_Twig extends \View
 			static::$_parser->addExtension(new $args());
 		}
 
+		// set defaults
+		if($defaults = \Config::get('parser.View_Twig.defaults', null)) {
+            $core = static::$_parser->getExtension('Twig_Extension_Core');
+            $core->setNumberFormat($defaults['number_format']['decimals'], $defaults['number_format']['decimal_point'], $defaults['number_format']['thousands_separator']);
+            $core->setDateFormat($defaults['date_format']['dates'], $defaults['date_format']['intervals']);
+        }
+
 		// Twig Lexer
 		static::$_twig_lexer_conf = \Config::get('parser.View_Twig.delimiters', null);
 		if (isset(static::$_twig_lexer_conf))
