@@ -55,8 +55,6 @@ class Twig_Fuel_Extension extends Twig_Extension
 
 				new Twig_SimpleFunction('config', array('Config', 'get')),
 
-				new Twig_SimpleFunction('dump', array('Debug', 'dump')),
-
 				new Twig_SimpleFunction('lang', array('Lang', 'get')),
 
 				new Twig_SimpleFunction('form_open', array('Form', 'open')),
